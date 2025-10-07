@@ -1,43 +1,43 @@
-<?php
-// File: components/footer.php
-// Komponen footer
-
-$school_info = [
-    'name' => 'SMA Negeri 1 Contoh',
-    'address' => 'Jl. Pendidikan No. 123, Jakarta',
-    'phone' => '(021) 1234-5678',
-    'email' => 'info@sman1contoh.sch.id',
-    'established' => 1985
-];
-?>
-
-<footer class="footer">
+<footer>
     <div class="container">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3><?php echo $school_info['name']; ?></h3>
-                <p><?php echo $school_info['address']; ?></p>
-                <p>Telp: <?php echo $school_info['phone']; ?></p>
-                <p>Email: <?php echo $school_info['email']; ?></p>
-            </div>
-            
-            <div class="footer-section">
-                <h4>Menu Cepat</h4>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Sekolah XYZ</h3>
+                <p>Sekolah terbaik dengan pendidikan berkualitas di Jakarta.</p>
                 <ul>
-                    <li><a href="index.php">Beranda</a></li>
-                    <li><a href="about.php">Tentang Kami</a></li>
-                    <li><a href="news.php">Berita</a></li>
-                    <li><a href="contact.php">Kontak</a></li>
+                    <li>Senin - Jumat: 07:00 - 15:00</li>
+                    <li>Sabtu: 07:00 - 12:00</li>
+                    <li>Minggu: Libur</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Kontak</h3>
+                <ul>
+                    <li>Phone: 021-1234567</li>
+                    <li>Email: info@sekolahxyz.sch.id</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Sosial Media</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Alamat</h3>
+                <ul>
+                    <li>Jl. Contoh No. 123, Jakarta Pusat</li>
                 </ul>
             </div>
         </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; <?php echo date('Y'); ?> <?php echo $school_info['name']; ?>. 
-               Berdiri sejak <?php echo $school_info['established']; ?></p>
+        <div class="copyright">
+            <p>© 2025 Sekolah XYZ. All rights reserved</p>
         </div>
     </div>
 </footer>
 
+<script src="js/script.js"></script>
 </body>
 </html>

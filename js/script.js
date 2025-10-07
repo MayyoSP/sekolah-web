@@ -1,89 +1,76 @@
-// File: js/script.js
-// JavaScript untuk interaksi website
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Mobile menu toggle
-    const mobileMenuBtn = document.createElement('button');
-    mobileMenuBtn.innerHTML = '☰';
-    mobileMenuBtn.className = 'mobile-menu-btn';
-    mobileMenuBtn.onclick = toggleMobileMenu;
-    
-    const navbar = document.querySelector('.navbar');
-    if(navbar) {
-        navbar.parentNode.insertBefore(mobileMenuBtn, navbar);
-    }
-    
-    // Smooth scrolling untuk anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if(target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-    
-    // Loading animation untuk form
-    const forms = document.querySelectorAll('form');
-    forms.forEach(form => {
-        form.addEventListener('submit', function() {
-            const submitBtn = form.querySelector('button[type="submit"]');
-            if(submitBtn) {
-                submitBtn.innerHTML = '⏳ Mengirim...';
-                submitBtn.disabled = true;
-            }
-        });
-    });
-    
-    // Auto-hide alerts
-    const alerts = document.querySelectorAll('.alert');
-    alerts.forEach(alert => {
-        setTimeout(() => {
-            alert.style.opacity = '0';
-            setTimeout(() => alert.remove(), 300);
-        }, 5000);
+hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    hamburger.innerHTML = navMenu.classList.contains('active') 
+        ? '<i class="fas fa-times"></i>' 
+        : '<i class="fas fa-bars"></i>';
+});
+
+document.querySelectorAll('#nav-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        hamburger.innerHTML = '<i class="fas fa-bars"></i>';
     });
 });
 
-function toggleMobileMenu() {
-    const navbar = document.querySelector('.navbar');
-    navbar.classList.toggle('mobile-active');
-}
+window.addEventListener('scroll', () => {
+    const header = document.getElementById('header');
+    if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
 
-// Search functionality
-function searchNews() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    const newsCards = document.querySelectorAll('.news-card');
-    
-    newsCards.forEach(card => {
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        const content = card.querySelector('p').textContent.toLowerCase();
-        
-        if(title.includes(searchTerm) || content.includes(searchTerm)) {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - 80,
+                behavior: 'smooth'
+            });
         }
     });
+});
+
+const loginModal = document.getElementById('loginModal');
+const signupModal = document.getElementById('signupModal');
+const loginBtn = document.getElementById('loginBtn');
+const signupBtn = document.getElementById('signupBtn');
+const closeLogin = document.getElementById('closeLogin');
+const closeSignup = document.getElementById('closeSignup');
+
+if (loginBtn) {
+    loginBtn.addEventListener('click', () => {
+        loginModal.style.display = 'block';
+    });
 }
 
-// Image lazy loading
-function lazyLoadImages() {
-    const images = document.querySelectorAll('img[data-src]');
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src;
-                img.classList.remove('lazy');
-                imageObserver.unobserve(img);
-            }
-        });
+if (signupBtn) {
+    signupBtn.addEventListener('click', () => {
+        signupModal.style.display = 'block';
     });
-    
-    images.forEach(img => imageObserver.observe(img));
 }
+
+closeLogin.addEventListener('click', () => {
+    loginModal.style.display = 'none';
+});
+
+closeSignup.addEventListener('click', () => {
+    signupModal.style.display = 'none';
+});
+
+window.addEventListener('click', (event) => {
+    if (event.target == loginModal) {
+        loginModal.style.display = 'none';
+    }
+    if (event.target == signupModal) {
+        signupModal.style.display = 'none';
+    }
+});

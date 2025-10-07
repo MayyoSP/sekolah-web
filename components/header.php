@@ -1,28 +1,11 @@
-<?php
-// File: components/header.php
-// Komponen header yang bisa dipakai di semua halaman
-
-// Data sekolah (nanti bisa dari database)
-$site_title = $site_title ?? "SMA Negeri 1 Contoh";
-$page_title = $page_title ?? "Beranda";
-?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $site_title . " - " . $page_title; ?></title>
+    <title>Situs Web Sekolah XYZ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <div class="logo">
-                <h1><?php echo $site_title; ?></h1>
-                <p>Membentuk Generasi Cerdas</p>
-            </div>
-            <?php include 'components/navbar.php'; ?>
-        </div>
-    </header>
