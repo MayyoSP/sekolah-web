@@ -1,6 +1,5 @@
 <?php include 'komponen/header.php'; ?>
 <?php include 'komponen/navbar.php'; ?>
-<?php include 'koneksi.php'; ?>
 
 <?php
 if (isset($_SESSION['error'])) {
@@ -10,31 +9,6 @@ if (isset($_SESSION['error'])) {
 if (isset($_SESSION['success'])) {
     echo "<p style='color:green; text-align:center;'>" . $_SESSION['success'] . "</p>";
     unset($_SESSION['success']);
-}
-
-// Handle CRUD berita (POST to self for add)
-if (isset($_SESSION['admin_id']) && $_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_berita'])) {
-    $judul = mysqli_real_escape_string($conn, $_POST['judul']);
-    $isi = mysqli_real_escape_string($conn, $_POST['isi']);
-    $tanggal = date('Y-m-d');
-    $sql = "INSERT INTO berita (judul, isi, tanggal) VALUES ('$judul', '$isi', '$tanggal')";
-    mysqli_query($conn, $sql);
-}
-
-// Handle delete berita
-if (isset($_SESSION['admin_id']) && isset($_GET['delete_berita'])) {
-    $id = intval($_GET['delete_berita']);
-    $sql = "DELETE FROM berita WHERE id = $id";
-    mysqli_query($conn, $sql);
-}
-
-// Handle edit berita (simple, assume POST with id)
-if (isset($_SESSION['admin_id']) && $_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['edit_berita'])) {
-    $id = intval($_POST['id']);
-    $judul = mysqli_real_escape_string($conn, $_POST['judul']);
-    $isi = mysqli_real_escape_string($conn, $_POST['isi']);
-    $sql = "UPDATE berita SET judul='$judul', isi='$isi' WHERE id=$id";
-    mysqli_query($conn, $sql);
 }
 ?>
 
@@ -93,92 +67,61 @@ if (isset($_SESSION['admin_id']) && $_SERVER['REQUEST_METHOD'] == 'POST' && isse
     </div>
 </section>
 
-<section id="berita">
+<section class="keunggulan" id="fasilitas">
     <div class="container">
-        <h2>Berita Sekolah</h2>
-        <div class="articles-grid">
-            <?php
-            $sql = "SELECT * FROM berita ORDER BY tanggal DESC";
-            $result = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo "<div class='article-card'>";
-                echo "<h4>" . $row['judul'] . "</h4>";
-                echo "<p>" . $row['isi'] . "</p>";
-                echo "<small>Tanggal: " . $row['tanggal'] . "</small>";
-                if (isset($_SESSION['admin_id'])) {
-                    echo "<form action='index.php#berita' method='post' style='margin-top:10px;'>";
-                    echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
-                    echo "<input type='text' name='judul' value='" . $row['judul'] . "' required>";
-                    echo "<textarea name='isi' required>" . $row['isi'] . "</textarea>";
-                    echo "<button type='submit' name='edit_berita' class='btn'>Edit</button>";
-                    echo "</form>";
-                    echo "<a href='index.php?delete_berita=" . $row['id'] . "#berita' class='btn' onclick='return confirm(\"Yakin hapus?\")'>Delete</a>";
-                }
-                echo "</div>";
-            }
-            ?>
-        </div>
-        <?php if (isset($_SESSION['admin_id'])) { ?>
-            <h3>Tambah Berita Baru</h3>
-            <form action="index.php#berita" method="post">
-                <label for="judul">Judul:</label>
-                <input type="text" id="judul" name="judul" required>
-                <label for="isi">Isi:</label>
-                <textarea id="isi" name="isi" required></textarea>
-                <button type="submit" name="add_berita" class="btn">Tambah</button>
-            </form>
-        <?php } ?>
-    </div>
-</section>
-
-<section id="guru">
-    <div class="container">
-        <h2>List Guru</h2>
-        <p>Untuk detail guru, <?php echo isset($_SESSION['admin_id']) ? '<a href="list_guru.php">klik di sini</a>' : 'silakan login sebagai admin.'; ?></p>
-        <?php
-        $sql = "SELECT * FROM guru LIMIT 3"; // Preview for user
-        $result = mysqli_query($conn, $sql);
-        echo "<div class='pests-grid'>";
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<div class='pest-card'>";
-            echo "<img src='" . $row['foto'] . "' alt='" . $row['nama'] . "' class='pest-image'>";
-            echo "<h3>" . $row['nama'] . "</h3>";
-            echo "<p>Mata Pelajaran: " . $row['mata_pelajaran'] . "</p>";
-            echo "</div>";
-        }
-        echo "</div>";
-        ?>
-    </div>
-</section>
-
-<section id="siswa">
-    <div class="container">
-        <h2>List Siswa</h2>
-        <p>Untuk detail siswa, <?php echo isset($_SESSION['admin_id']) ? '<a href="list_siswa.php">klik di sini</a>' : 'silakan login sebagai admin.'; ?></p>
-        <?php
-        $sql = "SELECT * FROM siswa LIMIT 3"; // Preview
-        $result = mysqli_query($conn, $sql);
-        echo "<div class='pests-grid'>";
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<div class='pest-card'>";
-            echo "<img src='" . $row['foto'] . "' alt='" . $row['nama'] . "' class='pest-image'>";
-            echo "<h3>" . $row['nama'] . "</h3>";
-            echo "<p>Kelas: " . $row['kelas'] . "</p>";
-            echo "</div>";
-        }
-        echo "</div>";
-        ?>
-    </div>
-</section>
-
-<section class="contact" id="kontak">
-    <div class="container">
-        <h2>Hubungi Kami</h2>
-        <p>Silakan hubungi kami untuk informasi lebih lanjut.</p>
-        <div class="contact-buttons">
-            <a href="mailto:info@sekolahxyz.sch.id" class="btn">Email Kami</a>
+        <h2>Fasilitas Sekolah</h2>
+        <p style="text-align: center; margin-bottom: 40px;">Fasilitas modern untuk mendukung pembelajaran.</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>Perpustakaan</h3>
+                <p>Koleksi buku lengkap dan digital.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <h3>Laboratorium</h3>
+                <p>Lab sains dan komputer canggih.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-futbol"></i>
+                </div>
+                <h3>Lapangan Olahraga</h3>
+                <p>Fasilitas olahraga indoor dan outdoor.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3>Ruang Kelas</h3>
+                <p>Ruang kelas nyaman dengan AC.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <h3>WiFi Gratis</h3>
+                <p>Akses internet cepat di seluruh area.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-medkit"></i>
+                </div>
+                <h3>UKS</h3>
+                <p>Unit Kesehatan Sekolah lengkap.</p>
+            </div>
         </div>
     </div>
 </section>
 
-<?php include 'komponen/footer.php'; ?>
+<section class="testimoni" id="testimoni">
+    <div class="container">
+        <h2>Testimoni Alumni</h2>
+        <p style="text-align: center; margin-bottom: 40px;">Apa kata alumni tentang Sekolah XYZ</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <img src="https://example.com/alumni1.jpg" alt="Alumni 1" class="
