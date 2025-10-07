@@ -2,7 +2,7 @@
 session_start(); 
 include 'koneksi.php';
 
-// Handle CRUD
+// Handle CRUD berita
 if (isset($_SESSION['admin_id']) && $_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_berita'])) {
     $judul = mysqli_real_escape_string($conn, $_POST['judul']);
     $isi = mysqli_real_escape_string($conn, $_POST['isi']);
@@ -34,7 +34,7 @@ if (isset($_SESSION['admin_id']) && $_SERVER['REQUEST_METHOD'] == 'POST' && isse
         <h2>Daftar Berita</h2>
         <?php if (isset($_SESSION['admin_id'])) { ?>
             <h3>Tambah Berita Baru</h3>
-            <form action="daftar_berita.php" method="post">
+            <form action="berita.php" method="post">
                 <label for="judul">Judul:</label>
                 <input type="text" id="judul" name="judul" required>
                 <label for="isi">Isi:</label>
@@ -42,10 +42,12 @@ if (isset($_SESSION['admin_id']) && $_SERVER['REQUEST_METHOD'] == 'POST' && isse
                 <button type="submit" name="add_berita" class="btn">Tambah</button>
             </form>
         <?php } ?>
-        <table>
+        <table class="table">
             <thead>
                 <tr>
-                    <?php if (isset($_SESSION['admin_id'])) { ?><th>Aksi</th><?php } ?>
+                    <?php if (isset($_SESSION['admin_id'])) { ?>
+                        <th>Action</th>
+                    <?php } ?>
                     <th>Judul</th>
                     <th>Isi</th>
                     <th>Tanggal</th>
@@ -59,11 +61,13 @@ if (isset($_SESSION['admin_id']) && $_SERVER['REQUEST_METHOD'] == 'POST' && isse
                     echo "<tr>";
                     if (isset($_SESSION['admin_id'])) {
                         echo "<td>";
-                        echo "<form action='daftar_berita.php' method='post' style='display:inline;'>";
+                        echo "<form action='berita.php' method='post' style='display:inline;'>";
                         echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
+                        echo "<input type='text' name='judul' value='" . $row['judul'] . "' required style='margin-bottom:5px;'>";
+                        echo "<textarea name='isi' required style='margin-bottom:5px;'>" . $row['isi'] . "</textarea>";
                         echo "<button type='submit' name='edit_berita' class='btn'>Edit</button>";
-                        echo "</form> ";
-                        echo "<a href='daftar_berita.php?delete_berita=" . $row['id'] . "' class='btn' onclick='return confirm(\"Yakin hapus?\")'>Hapus</a>";
+                        echo "</form>";
+                        echo "<a href='berita.php?delete_berita=" . $row['id'] . "' class='btn' onclick='return confirm(\"Yakin hapus?\")'>Delete</a>";
                         echo "</td>";
                     }
                     echo "<td>" . $row['judul'] . "</td>";

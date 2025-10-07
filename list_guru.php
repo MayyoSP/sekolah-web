@@ -30,9 +30,9 @@ if (isset($_SESSION['admin_id']) && $_SERVER['REQUEST_METHOD'] == 'POST' && isse
 <?php include 'komponen/header.php'; ?>
 <?php include 'komponen/navbar.php'; ?>
 
-<section id="list-guru">
+<section id="daftar-guru">
     <div class="container">
-        <h2>List Guru</h2>
+        <h2>Daftar Guru</h2>
         <?php if (isset($_SESSION['admin_id'])) { ?>
             <h3>Tambah Guru Baru</h3>
             <form action="list_guru.php" method="post">
@@ -45,13 +45,15 @@ if (isset($_SESSION['admin_id']) && $_SERVER['REQUEST_METHOD'] == 'POST' && isse
                 <button type="submit" name="add_guru" class="btn">Tambah</button>
             </form>
         <?php } ?>
-        <table>
+        <table class="table">
             <thead>
                 <tr>
-                    <?php if (isset($_SESSION['admin_id'])) { ?><th>Aksi</th><?php } ?>
-                    <th>Foto</th>
+                    <?php if (isset($_SESSION['admin_id'])) { ?>
+                        <th>Action</th>
+                    <?php } ?>
                     <th>Nama</th>
                     <th>Mata Pelajaran</th>
+                    <th>Foto</th>
                 </tr>
             </thead>
             <tbody>
@@ -64,14 +66,17 @@ if (isset($_SESSION['admin_id']) && $_SERVER['REQUEST_METHOD'] == 'POST' && isse
                         echo "<td>";
                         echo "<form action='list_guru.php' method='post' style='display:inline;'>";
                         echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
+                        echo "<input type='text' name='nama' value='" . $row['nama'] . "' required style='margin-bottom:5px;'>";
+                        echo "<input type='text' name='mata_pelajaran' value='" . $row['mata_pelajaran'] . "' required style='margin-bottom:5px;'>";
+                        echo "<input type='text' name='foto' value='" . $row['foto'] . "' required style='margin-bottom:5px;'>";
                         echo "<button type='submit' name='edit_guru' class='btn'>Edit</button>";
-                        echo "</form> ";
-                        echo "<a href='list_guru.php?delete_guru=" . $row['id'] . "' class='btn' onclick='return confirm(\"Yakin hapus?\")'>Hapus</a>";
+                        echo "</form>";
+                        echo "<a href='list_guru.php?delete_guru=" . $row['id'] . "' class='btn' onclick='return confirm(\"Yakin hapus?\")'>Delete</a>";
                         echo "</td>";
                     }
-                    echo "<td><img src='" . $row['foto'] . "' alt='" . $row['nama'] . "' style='width:50px; height:50px; border-radius:50%;'></td>";
                     echo "<td>" . $row['nama'] . "</td>";
                     echo "<td>" . $row['mata_pelajaran'] . "</td>";
+                    echo "<td><img src='" . $row['foto'] . "' alt='" . $row['nama'] . "'></td>";
                     echo "</tr>";
                 }
                 ?>

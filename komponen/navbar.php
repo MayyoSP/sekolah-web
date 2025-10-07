@@ -6,23 +6,23 @@
             <span class="logo-text">Sekolah XYZ</span>
         </a>
         <nav>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="index.php#beranda">Beranda</a></li>
-                <li><a href="index.php#tentang">Tentang</a></li>
-                <li><a href="daftar_berita.php">Berita</a></li>
-                <li><a href="list_guru.php">Guru</a></li>
-                <li><a href="list_siswa.php">Siswa</a></li>
-                <li><a href="index.php#kontak">Kontak</a></li>
-            </ul>
-            <?php if (isset($_SESSION['admin_id'])) { ?>
-                <a href="admin/process_logout.php" class="btn">Logout</a>
-            <?php } else { ?>
-                <button id="loginBtn" class="btn">Login</button>
-                <button id="signupBtn" class="btn">Signup</button>
-            <?php } ?>
             <button class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
             </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.php">Halaman Utama</a></li>
+                <li><a href="index.php#tentang">Tentang</a></li>
+                <li><a href="berita.php">Daftar Berita</a></li>
+                <li><a href="list_guru.php">Daftar Guru</a></li>
+                <li><a href="list_siswa.php">Daftar Siswa</a></li>
+                <li><a href="index.php#kontak">Kontak</a></li>
+                <?php if (isset($_SESSION['admin_id'])) { ?>
+                    <li><a href="admin/process_logout.php">Logout</a></li>
+                <?php } else { ?>
+                    <li><button id="loginBtn">Login</button></li>
+                    <li><button id="signupBtn">Signup</button></li>
+                <?php } ?>
+            </ul>
         </nav>
     </div>
 </header>

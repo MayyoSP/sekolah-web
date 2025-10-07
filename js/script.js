@@ -49,12 +49,16 @@ const closeSignup = document.getElementById('closeSignup');
 if (loginBtn) {
     loginBtn.addEventListener('click', () => {
         loginModal.style.display = 'block';
+        navMenu.classList.remove('active');
+        hamburger.innerHTML = '<i class="fas fa-bars"></i>';
     });
 }
 
 if (signupBtn) {
     signupBtn.addEventListener('click', () => {
         signupModal.style.display = 'block';
+        navMenu.classList.remove('active');
+        hamburger.innerHTML = '<i class="fas fa-bars"></i>';
     });
 }
 

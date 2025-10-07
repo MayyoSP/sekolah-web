@@ -1,13 +1,14 @@
 <?php include 'komponen/header.php'; ?>
 <?php include 'komponen/navbar.php'; ?>
+<?php include 'koneksi.php'; ?>
 
 <?php
 if (isset($_SESSION['error'])) {
-    echo "<p style='color:red; text-align:center;'>" . $_SESSION['error'] . "</p>";
+    echo '<div class="message error">' . $_SESSION['error'] . '</div>';
     unset($_SESSION['error']);
 }
 if (isset($_SESSION['success'])) {
-    echo "<p style='color:green; text-align:center;'>" . $_SESSION['success'] . "</p>";
+    echo '<div class="message success">' . $_SESSION['success'] . '</div>';
     unset($_SESSION['success']);
 }
 ?>
@@ -70,49 +71,48 @@ if (isset($_SESSION['success'])) {
 <section class="keunggulan" id="fasilitas">
     <div class="container">
         <h2>Fasilitas Sekolah</h2>
-        <p style="text-align: center; margin-bottom: 40px;">Fasilitas modern untuk mendukung pembelajaran.</p>
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">
                     <i class="fas fa-book"></i>
                 </div>
-                <h3>Perpustakaan</h3>
-                <p>Koleksi buku lengkap dan digital.</p>
+                <h3>Perpustakaan Modern</h3>
+                <p>Koleksi buku lengkap dan ruang baca nyaman.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
                     <i class="fas fa-flask"></i>
                 </div>
-                <h3>Laboratorium</h3>
-                <p>Lab sains dan komputer canggih.</p>
+                <h3>Laboratorium Sains</h3>
+                <p>Alat lengkap untuk praktik ilmu pengetahuan.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <h3>Ruang Komputer</h3>
+                <p>Akses internet cepat dan komputer terbaru.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
                     <i class="fas fa-futbol"></i>
                 </div>
                 <h3>Lapangan Olahraga</h3>
-                <p>Fasilitas olahraga indoor dan outdoor.</p>
+                <p>Fasilitas untuk berbagai cabang olahraga.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <i class="fas fa-chalkboard-teacher"></i>
+                    <i class="fas fa-music"></i>
                 </div>
-                <h3>Ruang Kelas</h3>
-                <p>Ruang kelas nyaman dengan AC.</p>
+                <h3>Ruang Seni</h3>
+                <p>Tempat berkreasi musik dan seni rupa.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <i class="fas fa-wifi"></i>
+                    <i class="fas fa-apple-alt"></i>
                 </div>
-                <h3>WiFi Gratis</h3>
-                <p>Akses internet cepat di seluruh area.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-medkit"></i>
-                </div>
-                <h3>UKS</h3>
-                <p>Unit Kesehatan Sekolah lengkap.</p>
+                <h3>Kantin Sehat</h3>
+                <p>Makanan bergizi dengan harga terjangkau.</p>
             </div>
         </div>
     </div>
@@ -120,8 +120,76 @@ if (isset($_SESSION['success'])) {
 
 <section class="testimoni" id="testimoni">
     <div class="container">
-        <h2>Testimoni Alumni</h2>
-        <p style="text-align: center; margin-bottom: 40px;">Apa kata alumni tentang Sekolah XYZ</p>
+        <h2>Testimoni Siswa</h2>
         <div class="testimonials-grid">
             <div class="testimonial-card">
-                <img src="https://example.com/alumni1.jpg" alt="Alumni 1" class="
+                <img src="https://example.com/siswa-testi1.jpg" alt="Testimoni 1" class="testimonial-image">
+                <div class="testimonial-content">
+                    <p class="testimonial-text">"Sekolah XYZ memberikan pengalaman belajar terbaik!"</p>
+                    <p class="testimonial-author">- Andi, Kelas XII</p>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://example.com/siswa-testi2.jpg" alt="Testimoni 2" class="testimonial-image">
+                <div class="testimonial-content">
+                    <p class="testimonial-text">"Guru-guru sangat suportif dan fasilitas lengkap."</p>
+                    <p class="testimonial-author">- Rina, Kelas XI</p>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://example.com/siswa-testi3.jpg" alt="Testimoni 3" class="testimonial-image">
+                <div class="testimonial-content">
+                    <p class="testimonial-text">"Saya senang belajar di sini, banyak kegiatan ekstrakurikuler."</p>
+                    <p class="testimonial-author">- Budi, Kelas X</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="faq" id="faq">
+    <div class="container">
+        <h2>Pertanyaan Umum</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Bagaimana cara mendaftar?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Datang langsung ke sekolah atau hubungi admin.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Apa saja program ekstrakurikuler?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Olahraga, seni, sains, dan banyak lagi.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Berapa biaya sekolah?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Hubungi kontak untuk detail.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contact" id="kontak">
+    <div class="container">
+        <h2>Hubungi Kami</h2>
+        <p>Silakan hubungi kami untuk informasi lebih lanjut.</p>
+        <div class="contact-buttons">
+            <a href="mailto:info@sekolahxyz.sch.id" class="btn">Email Kami</a>
+        </div>
+    </div>
+</section>
+
+<?php include 'komponen/footer.php'; ?>

@@ -166,49 +166,60 @@ nav {
 }
 
 .nav-menu {
-    display: flex;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: var(--light-text);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 80px 30px 30px;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    overflow-y: auto;
+    gap: 0;
     list-style: none;
-    gap: 8px;
+    z-index: 999;
+}
+
+.nav-menu.active {
+    right: 0;
 }
 
 .nav-menu li {
-    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
-.nav-menu a {
+.nav-menu a, .nav-menu button {
+    display: block;
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border-radius: 8px;
     text-decoration: none;
     color: var(--dark);
     font-weight: 500;
     transition: var(--transition);
-    position: relative;
-    padding: 8px 12px;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    white-space: nowrap;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
-.nav-menu a:hover {
+.nav-menu a:hover, .nav-menu button:hover {
     color: var(--primary);
     background: rgba(100, 92, 187, 0.05);
 }
 
-.nav-menu a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: var(--primary);
-    transition: var(--transition);
-    transform: translateX(-50%);
-}
-
-.nav-menu a:hover::after {
-    width: 80%;
+.nav-menu button {
+    text-align: left;
 }
 
 .hamburger {
+    display: block;
     cursor: pointer;
     font-size: 1.5rem;
     color: var(--dark);
@@ -755,21 +766,43 @@ footer {
     cursor: pointer;
 }
 
-table {
+.message {
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.success {
+    background: green;
+    color: white;
+}
+
+.error {
+    background: red;
+    color: white;
+}
+
+.table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-th, td {
+.table th, .table td {
+    padding: 10px;
     border: 1px solid #ddd;
-    padding: 8px;
     text-align: left;
 }
 
-th {
-    background-color: var(--primary);
+.table th {
+    background: var(--primary);
     color: var(--light-text);
+}
+
+.table img {
+    width: 100px;
+    height: auto;
 }
 
 @media (max-width: 1200px) {
@@ -831,24 +864,6 @@ th {
     
     .header-container {
         padding: 10px 20px;
-    }
-    
-    .nav-menu {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 80%;
-        max-width: 300px;
-        height: 100vh;
-        background: var(--light-text);
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        padding: 80px 30px 30px;
-        transition: var(--transition);
-        box-shadow: var(--shadow);
-        overflow-y: auto;
-        gap: 0;
     }
     
     .nav-menu.active {
