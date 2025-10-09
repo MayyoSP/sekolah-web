@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <?php include 'komponen/header.php'; ?>
 <?php include 'komponen/navbar.php'; ?>
 <?php include 'koneksi.php'; ?>
@@ -16,13 +17,13 @@ if (isset($_SESSION['success'])) {
 <div id="loginModal" class="modal">
     <div class="modal-content">
         <span id="closeLogin" class="close">&times;</span>
-        <h2>Login Admin</h2>
-        <form action="admin/process_login.php" method="post">
+        <h2>Sign In Admin</h2>
+        <form action="admin/process_signin.php" method="post">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-            <button type="submit" class="btn">Login</button>
+            <button type="submit" class="btn">Sign In</button>
         </form>
     </div>
 </div>
@@ -30,7 +31,7 @@ if (isset($_SESSION['success'])) {
 <div id="signupModal" class="modal">
     <div class="modal-content">
         <span id="closeSignup" class="close">&times;</span>
-        <h2>Signup Admin</h2>
+        <h2>Sign Up Admin</h2>
         <form action="admin/process_signup.php" method="post">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
@@ -38,14 +39,14 @@ if (isset($_SESSION['success'])) {
             <input type="email" id="email" name="email" required>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-            <button type="submit" class="btn">Signup</button>
+            <button type="submit" class="btn">Sign Up</button>
         </form>
     </div>
 </div>
 
 <section class="hero" id="beranda">
     <div class="container hero-content">
-        <h1>Selamat Datang di Sekolah XYZ</h1>
+        <h1>Selamat Datang di Sekolah Mayyo</h1>
         <p>Sekolah terbaik dengan pendidikan berkualitas di Jakarta.</p>
         <div class="hero-buttons">
             <a href="#tentang" class="btn">Pelajari Lebih Lanjut</a>
@@ -55,16 +56,30 @@ if (isset($_SESSION['success'])) {
 
 <section class="about" id="tentang">
     <div class="container">
-        <h2>Tentang Sekolah XYZ</h2>
+        <h2>Tentang Sekolah Mayyo</h2>
         <div class="about-container">
             <div class="about-image">
-                <img src="https://example.com/sekolah-image.jpg" alt="Sekolah XYZ">
+                <img src="https://i.imgur.com/WY8kbcl.png" alt="Sekolah Mayyo">
             </div>
             <div class="about-content">
-                <p>Sekolah XYZ adalah institusi pendidikan yang telah berdiri sejak 2000, fokus pada pengembangan siswa holistik.</p>
+                <p>Sekolah Mayyo adalah institusi pendidikan yang telah berdiri sejak 2000, fokus pada pengembangan siswa holistik.</p>
                 <p>Dengan fasilitas modern dan guru berpengalaman, kami siap membentuk generasi masa depan.</p>
             </div>
         </div>
+    </div>
+</section>
+
+<section id="visi-misi">
+    <div class="container">
+        <h2>Visi dan Misi Sekolah Mayyo</h2>
+        <h3>Visi</h3>
+        <p>Menjadi sekolah unggulan yang menghasilkan lulusan berkarakter dan berprestasi global.</p>
+        <h3>Misi</h3>
+        <ul>
+            <li>Menyediakan pendidikan berkualitas dengan kurikulum terkini.</li>
+            <li>Mengembangkan potensi siswa melalui kegiatan ekstrakurikuler.</li>
+            <li>Membangun lingkungan belajar yang aman dan inspiratif.</li>
+        </ul>
     </div>
 </section>
 
@@ -123,21 +138,21 @@ if (isset($_SESSION['success'])) {
         <h2>Testimoni Siswa</h2>
         <div class="testimonials-grid">
             <div class="testimonial-card">
-                <img src="https://example.com/siswa-testi1.jpg" alt="Testimoni 1" class="testimonial-image">
+                <img src="https://i.imgur.com/12qdXKg.png" alt="Testimoni 1" class="testimonial-image">
                 <div class="testimonial-content">
-                    <p class="testimonial-text">"Sekolah XYZ memberikan pengalaman belajar terbaik!"</p>
+                    <p class="testimonial-text">"Sekolah Mayyo memberikan pengalaman belajar terbaik!"</p>
                     <p class="testimonial-author">- Andi, Kelas XII</p>
                 </div>
             </div>
             <div class="testimonial-card">
-                <img src="https://example.com/siswa-testi2.jpg" alt="Testimoni 2" class="testimonial-image">
+                <img src="https://i.imgur.com/12qdXKg.png" alt="Testimoni 2" class="testimonial-image">
                 <div class="testimonial-content">
                     <p class="testimonial-text">"Guru-guru sangat suportif dan fasilitas lengkap."</p>
                     <p class="testimonial-author">- Rina, Kelas XI</p>
                 </div>
             </div>
             <div class="testimonial-card">
-                <img src="https://example.com/siswa-testi3.jpg" alt="Testimoni 3" class="testimonial-image">
+                <img src="https://i.imgur.com/12qdXKg.png" alt="Testimoni 3" class="testimonial-image">
                 <div class="testimonial-content">
                     <p class="testimonial-text">"Saya senang belajar di sini, banyak kegiatan ekstrakurikuler."</p>
                     <p class="testimonial-author">- Budi, Kelas X</p>
@@ -153,7 +168,7 @@ if (isset($_SESSION['success'])) {
         <div class="faq-container">
             <div class="faq-item">
                 <div class="faq-question">
-                    <span>Bagaimana cara mendaftar?</span>
+                    <span>Bagaimana cara cara mendaftar?</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
@@ -187,7 +202,7 @@ if (isset($_SESSION['success'])) {
         <h2>Hubungi Kami</h2>
         <p>Silakan hubungi kami untuk informasi lebih lanjut.</p>
         <div class="contact-buttons">
-            <a href="mailto:info@sekolahxyz.sch.id" class="btn">Email Kami</a>
+            <a href="mailto:info@sekolahmayyo.sch.id" class="btn">Email Kami</a>
         </div>
     </div>
 </section>

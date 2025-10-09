@@ -1,16 +1,26 @@
 const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('nav-menu');
+const mobileNav = document.getElementById('mobile-nav');
+const subNav = document.getElementById('sub-nav');
 
 hamburger.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    hamburger.innerHTML = navMenu.classList.contains('active') 
+    if (window.innerWidth > 768) {
+        if (subNav) {
+            subNav.classList.toggle('active');
+        }
+    } else {
+        if (mobileNav) {
+            mobileNav.classList.toggle('active');
+        }
+    }
+    hamburger.innerHTML = (subNav && subNav.classList.contains('active')) || (mobileNav && mobileNav.classList.contains('active')) 
         ? '<i class="fas fa-times"></i>' 
         : '<i class="fas fa-bars"></i>';
 });
 
-document.querySelectorAll('#nav-menu a').forEach(link => {
+document.querySelectorAll('.desktop-nav a, .mobile-nav a, .sub-nav a').forEach(link => {
     link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
+        if (mobileNav) mobileNav.classList.remove('active');
+        if (subNav) subNav.classList.remove('active');
         hamburger.innerHTML = '<i class="fas fa-bars"></i>';
     });
 });
@@ -41,26 +51,28 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 const loginModal = document.getElementById('loginModal');
 const signupModal = document.getElementById('signupModal');
-const loginBtn = document.getElementById('loginBtn');
-const signupBtn = document.getElementById('signupBtn');
+const loginBtns = document.querySelectorAll('#loginBtn');
+const signupBtns = document.querySelectorAll('#signupBtn');
 const closeLogin = document.getElementById('closeLogin');
 const closeSignup = document.getElementById('closeSignup');
 
-if (loginBtn) {
-    loginBtn.addEventListener('click', () => {
+loginBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
         loginModal.style.display = 'block';
-        navMenu.classList.remove('active');
+        if (mobileNav) mobileNav.classList.remove('active');
+        if (subNav) subNav.classList.remove('active');
         hamburger.innerHTML = '<i class="fas fa-bars"></i>';
     });
-}
+});
 
-if (signupBtn) {
-    signupBtn.addEventListener('click', () => {
+signupBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
         signupModal.style.display = 'block';
-        navMenu.classList.remove('active');
+        if (mobileNav) mobileNav.classList.remove('active');
+        if (subNav) subNav.classList.remove('active');
         hamburger.innerHTML = '<i class="fas fa-bars"></i>';
     });
-}
+});
 
 closeLogin.addEventListener('click', () => {
     loginModal.style.display = 'none';
@@ -78,3 +90,65 @@ window.addEventListener('click', (event) => {
         signupModal.style.display = 'none';
     }
 });
+
+// FAQ Accordion
+document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+        const answer = question.nextElementSibling;
+        const isActive = answer.classList.contains('active');
+        
+        // Close all answers
+        document.querySelectorAll('.faq-answer').forEach(ans => {
+            ans.classList.remove('active');
+        });
+        
+        // Close all icons
+        document.querySelectorAll('.faq-question i').forEach(icon => {
+            icon.className = 'fas fa-chevron-down';
+        });
+        
+        // If the clicked answer wasn't active, open it
+        if (!isActive) {
+            answer.classList.add('active');
+            question.querySelector('i').className = 'fas fa-chevron-up';
+        }
+    });
+});
+
+// Edit mechanic
+let currentEditingRow = null;
+
+document.querySelectorAll('.edit-btn').forEach(button => {
+    button.addEventListener('click', (e) => {
+        const row = button.closest('tr');
+        if (currentEditingRow && currentEditingRow !== row) {
+            cancelEdit(currentEditingRow);
+        }
+        if (button.textContent === 'Edit') {
+            startEdit(row);
+        } else {
+            saveEdit(row);
+        }
+    });
+});
+
+function startEdit(row) {
+    currentEditingRow = row;
+    row.querySelectorAll('input, textarea').forEach(field => {
+        field.removeAttribute('readonly');
+    });
+    row.querySelector('.edit-btn').textContent = 'Simpan';
+}
+
+function cancelEdit(row) {
+    row.querySelectorAll('input, textarea').forEach(field => {
+        field.setAttribute('readonly', true);
+        field.value = field.dataset.original;
+    });
+    row.querySelector('.edit-btn').textContent = 'Edit';
+    currentEditingRow = null;
+}
+
+function saveEdit(row) {
+    row.querySelector('form').submit();
+}

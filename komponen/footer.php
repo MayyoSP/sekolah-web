@@ -2,7 +2,7 @@
     <div class="container">
         <div class="footer-container">
             <div class="footer-column">
-                <h3>Sekolah XYZ</h3>
+                <h3>Sekolah Mayyo</h3>
                 <p>Sekolah terbaik dengan pendidikan berkualitas di Jakarta.</p>
                 <ul>
                     <li>Senin - Jumat: 07:00 - 15:00</li>
@@ -14,7 +14,7 @@
                 <h3>Kontak</h3>
                 <ul>
                     <li>Phone: 021-1234567</li>
-                    <li>Email: info@sekolahxyz.sch.id</li>
+                    <li>Email: info@sekolahmayyo.sch.id</li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="copyright">
-            <p>© 2025 Sekolah XYZ. All rights reserved</p>
+            <p>© 2025 Sekolah Mayyo. All rights reserved</p>
         </div>
     </div>
 </footer>
